@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<openerp>
+  <data>
+
+    <template id="project_soulco_report_picking_inherit" inherit_id="stock.report_picking">
+      <xpath expr="//table[@class='table table-condensed'][2]//thead//tr//th[3]" position="after">
+	<th>Numéro de serie</th>
+      </xpath>
+       <xpath expr="//table[@class='table table-condensed'][3]//thead//tr//th[3]" position="after">
+	<th>Numéro de serie</th>
+      </xpath>
+      <xpath expr="//tr[@t-foreach='o.move_lines']//t//td[3]" position="after">
+	<td>
+	  <span t-field="move.lot_ids.name"/>
+	</td>
+      </xpath>
+      <xpath expr="//tr[@t-foreach='o.pack_operation_ids']//td[3]" position="after">
+	<td>
+	  <span t-field="pack_operation.lot_id.name"/>
+	</td>
+      </xpath>
+    </template>
+
+    </data>
+</openerp>
