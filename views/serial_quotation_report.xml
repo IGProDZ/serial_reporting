@@ -1,3 +1,72 @@
+<<<<<<< HEAD
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <template id="serial_saleorder_quotation_report" inherit_id="sale.report_saleorder_document">
+            <xpath expr="//table[@class='table table-condensed']/thead/tr" position="replace">
+                <tr>
+                    <!-- numéro de produit commençant par 1 -->
+                    <th>N°</th>
+                    <!-- code bare (numéro de série) -->
+                    <!-- <t t-if="o.state in ['done']"> -->
+                        <th>Code</th>
+                    <!-- </t> -->
+                    <th>Description</th>
+                    <th class="text-right">Quantity</th>
+                    <th class="text-right">Unit Price</th>
+                    <th class="text-right">Price</th>
+                    <th>Tax</th>
+                    <th groups="sale.group_discount_per_so_line">Disc.(%)</th>
+                </tr>
+            </xpath>
+            <xpath expr="//table[@class='table table-condensed']/tbody/tr" position="replace">
+                <t t-set="count" t-value="1"/>
+                <tr t-foreach="o.order_line" t-as="l">
+                    <td>
+                        <!-- numéro d'enregistrement commençant par 1 -->
+                        <t t-raw="count"/>
+                    </td>
+                    <!-- <t t-if="o.state in ['done']"> -->
+                        <td>
+                            <!-- <span t-field="l.procurement_ids.move_dest_id.lot_ids.name"/> -->
+                            <!-- <span t-field="l.procurement_ids.move_ids.lot_ids.name"/> -->
+                            <!-- <span t-field="l.procurement_ids.warehouse_id.lot_stock_id.loc_barcode"/> -->
+                            <span t-field="o.picking_ids.move_lines.lot_ids.name.ensure_one()"/>
+
+                            <!-- <tr t-foreach="o.picking_ids.move_lines.ensure_one()" t-as="j">
+                                <td>
+                                    <span t-field="j.lot_ids.name"/>
+                                </td>
+                            </tr> -->
+                        </td>
+                    <!-- </t> -->
+                    <td>
+                        <span t-field="l.name"/>
+                    </td>
+                    <td class="text-right">
+                        <span t-field="l.product_uom_qty"/>
+                        <span groups="product.group_uom" t-field="l.product_uom"/>
+                    </td>
+                    <td class="text-right">
+                        <span t-field="l.price_unit"/>
+                    </td>
+                    <td class="text-right">
+                        <span t-field="l.price_subtotal" t-field-options='{"widget": "monetary", "display_currency": "o.pricelist_id.currency_id"}'/>
+                    </td>
+                    <td>
+                        <span t-esc="', '.join(map(lambda x: x.name, l.tax_id))"/>
+                    </td>
+                    <td groups="sale.group_discount_per_so_line">
+                        <span t-field="l.discount"/>
+                    </td>
+                    <!-- increment counter -->
+                    <t t-set="count" t-value="count+1"/>
+                </tr>
+            </xpath>
+        </template>
+    </data>
+</openerp>
+=======
 <?xml version="1.0"?>
 <openerp>
     <data>
@@ -56,3 +125,4 @@
 
     </data>
 </openerp>
+>>>>>>> a1b81af12ad31af11e99047b1671239c297a9f3e
