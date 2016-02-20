@@ -1,2 +1,3 @@
 # -*- coding: utf-8 -*-
-from . import soulcoreport
+import soulcoreport
+import montantEnLettres
