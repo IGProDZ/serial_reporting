@@ -18,6 +18,7 @@
         'views/serial_quotation_report.xml',
         'views/serial_purchase_order_report.xml',
         'views/serial_reporting_picking_custum.xml',
+        'views/account_invoice_custum_soulco.xml',
     ],
 
 }
