@@ -167,7 +167,27 @@
           </p>
           <div class="oe_structure"/>
 	</div>
+	<div class="footer">
+	  <style type="text/css">
+	    .tg  {border-collapse:collapse;border-spacing:0;}
+	    .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+	    .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+	    .tg .tg-yw4l{vertical-align:top}
+	  </style>
+	  <table class="tg">
+	    <tr>
+	      <th class="tg-yw4l">
+		<div t-field="o.company_id" style="text-align:left"
+                     t-field-options='{"widget": "contact", "fields": ["address","name", "phone", "fax"], "no_marker": true}'/></th>
+		<th class="tg-yw4l"></th>
+		<th class="tg-yw4l"></th>
+		<th class="tg-yw4l">  <img class="img img-responsive" src="/sale_order_report/static/src/img/Unify_advanced_partner_02.png"/>
+		</th>
+	    </tr>
+	  </table>
+	</div>
       </xpath>
+
     </template>
 
     <!-- <template id="serial_saleorder_quotation_report" -->
