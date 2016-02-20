@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<!-- Report for purchae order -->
+<openerp>
+    <data>
+        <template id="serial_purchase_order_report" inherit_id="purchase.report_purchaseorder_document">
+            <!-- image logo -->
+            <!-- <xpath expr="//div[@class='row'][1]" position="before">
+                <img t-att-src="'/serial_reporting/static/src/img/logo.png'" />
+            </xpath> -->
+
+            <!-- thead -->
+            <xpath expr="//table[@class='table table-condensed']/thead/tr" position="replace">
+                <tr>
+                    <th>N°</th>
+                    <th>Reference S</th>
+                    <th>Reference L</th>
+                    <th><strong>Designation</strong></th>
+                    <th class="text-center"><strong>Date Req.</strong></th>
+                    <th class="text-right"><strong>Qty</strong></th>
+                    <th class="text-right"><strong>Unit Price</strong></th>
+                    <th class="text-right"><strong>Net Price</strong></th>
+                    <th><strong>Taxes</strong></th>
+                </tr>
+            </xpath>
+            <!-- tbody -->
+            <xpath expr="//table[@class='table table-condensed']/tbody/tr" position="replace">
+                <t t-set="count" t-value="1"/>
+                <tr t-foreach="o.order_line" t-as="line">
+                    <td>
+                        <t t-raw="count"/>
+                    </td>
+                    <td>
+                        <!-- Referecne S -->
+                        <span t-field="line.product_id.ean13"/>
+                    </td>
+                    <td>
+                        <!-- Referecne L -->
+                        <span t-field="line.product_id.default_code"/>
+                    </td>
+                    <td>
+                        <span t-field="line.name"/>
+                    </td>
+                    <td class="text-center">
+                        <span t-field="line.date_planned"/>
+                    </td>
+                    <td class="text-right">
+                        <span t-field="line.product_qty"/>
+                        <span t-field="line.product_uom.name" groups="product.group_uom"/>
+                    </td>
+                    <td class="text-right">
+                        <span t-field="line.price_unit"/>
+                    </td>
+                    <td class="text-right">
+                        <span t-field="line.price_subtotal"
+                            t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
+                    </td>
+                    <td>
+                        <span t-esc="', '.join(map(lambda x: x.name, line.taxes_id))"/>
+                    </td>
+                    <t t-set="count" t-value="count+1"/>
+                </tr>
+            </xpath>
+            <!-- arrete -->
+            <xpath expr="//div[@class='col-xs-4 pull-right']" position="after">
+                <div t-if="o.name" class="col-xs-8 pull-left">
+                    <strong>Arrêtée la présente facture à la somme de : </strong>
+                    <p t-raw="o.coversion(o.amount_total)"/>
+                </div>
+            </xpath>
+
+            <!-- remove shipping adress -->
+
+
+            <!-- Change the position of data partner -->
+
+        </template>
+    </data>
+</openerp>
