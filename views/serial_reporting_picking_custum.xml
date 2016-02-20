@@ -9,7 +9,7 @@
        <xpath expr="//table[@class='table table-condensed'][3]//thead//tr//th[3]" position="after">
 	<th>Numéro de serie</th>
       </xpath>
-      <xpath expr="//tr[@t-foreach='o.move_lines']//t//td[3]" position="after">
+      <xpath expr="//tr[@t-foreach='o.move_lines']//td[3]" position="after">
 	<td>
 	  <span t-field="move.lot_ids.name"/>
 	</td>
