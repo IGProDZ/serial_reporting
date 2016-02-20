@@ -12,7 +12,6 @@
             <span t-if="o.state in ['draft','sent']">Quotation N° </span>
             <span t-field="o.name"/>
           </h2>
-
 	  <div t-if="o.date_order" class="col-xs-3">
             <strong t-if="o.state not in ['draft','sent']">Date Ordered:</strong>
             <strong t-if="o.state in ['draft','sent']">Quotation Date:</strong>
@@ -32,30 +31,21 @@
                      t-field-options='{"widget": "contact", "fields": ["address","name", "phone", "fax"], "no_marker": true}'/>
 		<p t-if="o.partner_id.vat">VAT: <span t-field="o.partner_id.vat" style="text-align:left"/></p>
               </div>
-            </div>
-	    <div class="col-xs-5 col-xs-offset-1">
+	    </div>
+	    <div class="col-xs-5 col-xs-offset-1" style="background-color:#000000;border: 1px solid #000000;color:#000000;">
 	      <h2 t-field="o.partner_id.name"/>
 	      <div t-field="o.partner_id"
                    t-field-options='{"widget": "contact", "fields": ["address"], "no_marker": true}' />
-	    </div>
-	    <div class="col-xs-6 col-xs-offset-6">
-	      <span>RC N°: </span>
-	      <span t-field="o.partner_id.rc" style="text-align:left"/>
-            </div>
-	    <div class="col-xs-6 col-xs-offset-6">
-	      <span>NIF  : </span>
-	      <span t-field="o.partner_id.nif" style="text-align:left"/>
-            </div>
-	    <div class="col-xs-6 col-xs-offset-6">
-	      <span>AI   : </span>
-	      <span t-field="o.partner_id.ai" style="text-align:left"/>
-            </div>
-	    <div class="col-xs-6 col-xs-offset-6">
-	      <span>Ref Client   : </span>
-	      <span t-field="o.partner_id.ref" style="text-align:left"/>
-            </div>
+	      <p>RC N°: <span t-field="o.partner_id.rc" style="text-align:left"/></p>
+	      <p>NIF  : <span t-field="o.partner_id.nif" style="text-align:left"/></p>
+	      <p>AI   : <span t-field="o.partner_id.ai" style="text-align:left"/></p>
+	      <div style="background-color:#000000;border: 1px solid #000000;color:#000000;">
+		<span>Ref Client   : </span>
+		<span t-field="o.partner_id.ref" style="text-align:left"/>
+	      </div>
 
-          </div>
+	    </div>
+	  </div>
 
           <div class="row mt32 mb32" id="informations">
             <div t-if="o.client_order_ref" class="col-xs-3">
