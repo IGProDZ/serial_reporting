@@ -202,6 +202,9 @@
           </div>
 	</t>
       </xpath>
+      <xpath expr="//div[@class='page']" position="after">
+        <t t-call="serial_reporting.soulco_custom_footer" />
+      </xpath>
     </template>
   </data>
 </openerp>
