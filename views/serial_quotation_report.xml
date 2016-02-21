@@ -171,54 +171,10 @@
                     </p>
                     <div class="oe_structure"/>
                 </div>
-                <!-- <style>
-                    table,
-                    th,
-                    td {
-                        border: 2px solid black;
-                        border-collapse: collapse;
-                    }
-                    th,
-                    td {
-                        padding: 5px;
-                        text-align: left;
-                    }
-                </style> -->
-                <div class="footer">
-                    <table class="table table-condensed" style="font-size:75%;">
-                        <tr>
-                            <td>
-                                <p> <strong t-field="o.company_id.name"> </strong></p>
-                                <p>Siège social:</p>
-                                <p t-field="o.company_id.street"/>
-                                <span t-field="o.company_id.city"/>
-                                <p t-field="o.company_id.country_id.name"/>
-                                <p>Tel: <span t-field="o.company_id.phone"/></p>
-                                <p>Fax: <span t-field="o.company_id.fax"/></p>
-                                <p t-field="o.company_id.website"/>
-                            </td>
-                            <td>
-                                <p>
-                                    Capital social: <span t-field="o.company_id.capital_social"/>
-                                    <span t-field="o.company_id.currency_id.name"/>
-                                </p>
-                                <p>R.C No.: <span t-field="o.company_id.company_registry"/></p>
-                                <p>N.I.F No.: <span t-field="o.company_id.vat"/></p>
-                                <p>A.I No.: <span t-field="o.company_id.ai"/></p>
-                                <p>N.I.S No.: <span t-field="o.company_id.nis"/></p>
-                            </td>
-                            <td>
-                                <p>C.B No.: <span t-field="o.company_id.bank_ids.acc_number"/></p>
-                                <p t-field="o.company_id.bank_ids.bank_name"/>
-                            </td>
-                            <td>
-                                <img src="/serial_reporting/static/src/img/Unify_advanced_partner_02.png"/>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
             </xpath>
-
+            <xpath expr="//div[@class='page']" position="after">
+                <t t-call="serial_reporting.soulco_custom_footer" />
+            </xpath>
         </template>
     </data>
 </openerp>

@@ -20,6 +20,7 @@
         'views/serial_reporting_picking_custum.xml',
         'views/account_invoice_custum_soulco.xml',
         'views/serial_reporting_view.xml',
+        'views/soulco_footer_report.xml',
     ],
 
 }
