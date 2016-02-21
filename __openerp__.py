@@ -21,6 +21,7 @@
         'views/account_invoice_custum_soulco.xml',
         'views/serial_reporting_view.xml',
         'views/soulco_footer_report.xml',
+        'views/soulco_header_report.xml',
     ],
 
 }
