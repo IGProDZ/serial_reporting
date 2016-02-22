@@ -1,6 +1,10 @@
 #-*- coding: utf-8 -*-
 
 from openerp import models, fields, api
+class SoulcoReportCompany(models.Model):
+    _inherit = 'res.company'
+
+    capital_social = fields.Char("Capital social")
 
 class ReportQuotation(models.Model):
     _inherit = 'purchase.order'
