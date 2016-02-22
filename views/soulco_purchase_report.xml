@@ -36,12 +36,12 @@
                     <td>
                         <t t-raw="count"/>
                     </td>
+                    <!-- Referecne S -->
                     <td>
-                        <!-- Referecne S -->
                         <span t-field="line.product_id.ean13"/>
                     </td>
+                    <!-- Referecne L -->
                     <td>
-                        <!-- Referecne L -->
                         <span t-field="line.product_id.default_code"/>
                     </td>
                     <td>
@@ -74,33 +74,41 @@
                     <p t-field="o.amounTexte"/>
                 </div>
             </xpath>
-
-            <!-- Add RC NIF & AI on customer info -->
-            <xpath expr="//div[@class='col-xs-5 col-xs-offset-1']/div" position="replace">
-                <h3 t-field="o.partner_id.name"></h3>
-                <div t-field="o.partner_id" t-field-options='{"widget": "contact", "fields": ["address", "phone", "fax"], "no_marker": true}'/>
-                <!-- <p t-if="o.partner_id.vat">VAT: <span t-field="o.partner_id.vat"/></p> -->
-                <!-- <div class='col-xs-12 col-xs-offset-1'>
-                    <span> RC N°: </span><p t-field="o.partner_id.rc"/>
-                    <span> NIF: </span><p t-field="o.partner_id.nif"/>
-                    <span> AI: </span><p t-field="o.partner_id.ai"/>
-                    <span> Ref client: </span><p t-field="o.partner_ref"/>
-                </div> -->
+            <!-- Remove 'your shipping company' -->
+            <xpath expr="//div[@class='col-xs-6']" position="replace">
+                <div class='col-xs-6'>
+                    <h2>Soulco company</h2>
+                </div>
             </xpath>
-            <xpath expr="//div[@class='col-xs-5 col-xs-offset-1']" position="after">
-                <div class='col-xs-5 col-xs-offset-'>
-                    <span>
-                        RC N°:
-                    </span><p t-field="o.partner_id.rc"/>
-                    <span>
-                        NIF:
-                    </span><p t-field="o.partner_id.nif"/>
-                    <span>
-                        AI:
-                    </span><p t-field="o.partner_id.ai"/>
-                    <span>
-                        Ref client:
-                    </span><p t-field="o.partner_ref"/>
+            <!-- Add RC NIF & AI on customer info -->
+            <xpath expr="//div[@class='col-xs-5 col-xs-offset-1']" position="replace">
+                <div class="col-xs-4 col-xs-offset-1">
+                    <table class="table-bordered" style="width:100%;">
+                        <tr>
+                            <td>
+                                <h3 t-field="o.partner_id.name"></h3>
+                                <div t-field="o.partner_id" t-field-options='{"widget": "contact", "fields": ["address"], "no_marker": true}'/>
+                                <!-- Saut de ligne ici -->
+                                <br/>
+                                <p>
+                                    RC N°:
+                                    <span t-field="o.partner_id.rc"/></p>
+                                <p>
+                                    NIF:
+                                    <span t-field="o.partner_id.nif"/></p>
+                                <p>
+                                    AI:
+                                    <span t-field="o.partner_id.ai"/></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>
+                                    Ref client:
+                                    <span t-field="o.partner_ref"/></p>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </xpath>
         </template>
