@@ -116,13 +116,13 @@
             <!-- Add RC NIF & AI on customer info -->
             <xpath expr="//div[@class='col-xs-5 col-xs-offset-1']" position="replace">
                 <div class="col-xs-4 col-xs-offset-1">
-                    <table class="table-bordered" style="width:120%;">
+                    <table  style="width:120%;border-style:solid;border-color:#000000">
+                        <!-- class="table-bordered" -->
                         <tr>
                             <td>
-                                <h3 t-field="o.partner_id.name"></h3>
-                                <div  style="pading-left:10px;" t-field="o.partner_id" t-field-options='{"widget": "contact", "fields": ["address"], "no_marker": true}'/>
-                                <!-- Saut de ligne ici -->
-                                <br/>
+                                <h2 t-field="o.partner_id.name" style="padding-top:10px;margin:10px;"></h2>
+                                <div style="margin:10px;" t-field="o.partner_id" t-field-options='{"widget": "contact", "fields": ["address"], "no_marker": true}'/>
+
                                 <p style="margin:10px;">
                                     RC N°:
                                     <span t-field="o.partner_id.rc"/></p>
