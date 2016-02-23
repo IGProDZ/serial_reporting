@@ -16,10 +16,12 @@ class SoulcoPurchase(models.Model):
     @api.depends("amount_total")
     def amountToText(self):
         for r in self:
-            montant = montantEnLettres.montant_en_lettres(r.amount_total)
-            self.amounTexte = montant[0] + "dinar(s)" + montant[1]
-            self.amounTexte = self.amounTexte.capitalize()
-
+            if r.amount_total != 0:
+                montant = montantEnLettres.montant_en_lettres(r.amount_total)
+                self.amounTexte = montant[0] + "dinar(s)" + montant[1]
+                self.amounTexte = self.amounTexte.capitalize()
+            else:
+                self.amounTexte = "Zéro dinars"
 
 class SoulcoSaleOrder(models.Model):
     _inherit = 'sale.order'
@@ -28,12 +30,15 @@ class SoulcoSaleOrder(models.Model):
     @api.depends("amount_total", "total_timbre", "amount_timbre")
     def amountToText(self):
         for r in self:
-            if r.amount_timbre:
-                montant = montantEnLettres.montant_en_lettres(r.total_timbre)
+            if r.amount_total == 0:
+                self.amounTexte = "Zéro dinars"
             else:
-                montant = montantEnLettres.montant_en_lettres(r.amount_total)
-            self.amounTexte = montant[0] + "dinar(s)" + montant[1]
-            self.amounTexte = self.amounTexte.capitalize()
+                if r.amount_timbre:
+                    montant = montantEnLettres.montant_en_lettres(r.total_timbre)
+                else:
+                    montant = montantEnLettres.montant_en_lettres(r.amount_total)
+                self.amounTexte = montant[0] + "dinar(s)" + montant[1]
+                self.amounTexte = self.amounTexte.capitalize()
 
 class SoulcoSettings(models.Model):
     _inherit = 'report.paperformat'
