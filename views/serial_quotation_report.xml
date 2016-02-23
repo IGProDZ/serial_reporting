@@ -175,9 +175,9 @@
           <div class="oe_structure"/>
         </div>
       </xpath>
-      <xpath expr="//div[@class='page']" position="before">
-	<t t-call="serial_reporting.soulco_custom_header" />
-      </xpath>
+      <!-- <xpath expr="//div[@class='page']" position="before"> -->
+      <!-- 	<t t-call="serial_reporting.soulco_custom_header" /> -->
+      <!-- </xpath> -->
       <xpath expr="//div[@class='page']" position="after">
         <t t-call="serial_reporting.soulco_custom_footer" />
       </xpath>
