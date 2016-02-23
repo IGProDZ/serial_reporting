@@ -30,13 +30,10 @@ class SoulcoSaleOrder(models.Model):
         for r in self:
             if r.amount_timbre:
                 montant = montantEnLettres.montant_en_lettres(r.total_timbre)
-                self.amounTexte = montant[0] + "dinar(s)" + montant[1]
-                self.amounTexte = self.amounTexte.capitalize()
             else:
                 montant = montantEnLettres.montant_en_lettres(r.amount_total)
-                self.amounTexte = montant[0] + "dinar(s)" + montant[1]
-                self.amounTexte = self.amounTexte.capitalize()
-
+            self.amounTexte = montant[0] + "dinar(s)" + montant[1]
+            self.amounTexte = self.amounTexte.capitalize()
 
 class SoulcoSettings(models.Model):
     _inherit = 'report.paperformat'
