@@ -186,7 +186,7 @@
             <!--   </div> -->
             <!-- </div> -->
 	    <strong>Arrêtée la présente facture à la somme de:</strong>
-            <p t-field="o.text_amount"/>
+            <p t-field="o.amounTexte"/>
             <p t-if="o.comment">
               <strong>Comment:</strong>
               <span t-field="o.comment"/>
@@ -201,6 +201,12 @@
             </p>
           </div>
 	</t>
+      </xpath>
+      <!-- <xpath expr="//div[@class='page']" position="before"> -->
+      <!--   <t t-call="serial_reporting.soulco_custom_header" /> -->
+      <!-- </xpath> -->
+      <xpath expr="//div[@class='page']" position="after">
+        <t t-call="serial_reporting.soulco_custom_footer" />
       </xpath>
     </template>
   </data>

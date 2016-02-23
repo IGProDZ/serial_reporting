@@ -2,14 +2,27 @@
 <openerp>
     <data>
         <record model="ir.ui.view" id="soulco_capital_social_form">
-          <field name="name">soulco.capital.social.form</field>
+            <field name="name">soulco.capital.social.form</field>
             <field name="model">res.company</field>
-            <field name="inherit_id" ref="base.view_company_form" />
+            <field name="inherit_id" ref="base.view_company_form"/>
             <field name="arch" type="xml">
-              <xpath expr="//field[@name='email']" position="after">
-        	    <field name="capital_social" />
-        	  </xpath>
+                <xpath expr="//field[@name='email']" position="after">
+                    <field name="capital_social"/>
+                </xpath>
             </field>
         </record>
+
+        <!-- Default configuration values for Soulco report -->
+        <record model="ir.ui.view" id="soulco_paper_format_form">
+            <field name="name">soulco.pape.format.form</field>
+            <field name="model">report.paperformat</field>
+            <field name="inherit_id" ref="report.paperformat_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='margin_bottom']" position="replace">
+                    <field name="margin_bottom">40</field>
+                </xpath>
+            </field>
+        </record>
+
     </data>
 </openerp>

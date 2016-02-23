@@ -1,0 +1,153 @@
+<?xml version="1.0"?>
+<!-- Report for purchae order -->
+<openerp>
+    <data>
+        <template id="serial_purchase_order_report" inherit_id="purchase.report_purchaseorder_document">
+            <!-- thead -->
+            <xpath expr="//table[@class='table table-condensed']/thead/tr" position="replace">
+                <tr>
+                    <th>N°</th>
+                    <th>Reference S</th>
+                    <th>Reference L</th>
+                    <th>
+                        <strong>Designation</strong>
+                    </th>
+                    <th class="text-center">
+                        <strong>Date Req.</strong>
+                    </th>
+                    <th class="text-right">
+                        <strong>Qty</strong>
+                    </th>
+                    <th class="text-right">
+                        <strong>Unit Price</strong>
+                    </th>
+                    <th class="text-right">
+                        <strong>Net Price</strong>
+                    </th>
+                    <th>
+                        <strong>Taxes</strong>
+                    </th>
+                </tr>
+            </xpath>
+            <!-- tbody -->
+            <xpath expr="//table[@class='table table-condensed']/tbody/tr" position="replace">
+                <t t-set="count" t-value="1"/>
+                <tr t-foreach="o.order_line" t-as="line">
+                    <td>
+                        <t t-raw="count"/>
+                    </td>
+                    <!-- Referecne S -->
+                    <td>
+                        <span t-field="line.product_id.ean13"/>
+                    </td>
+                    <!-- Referecne L -->
+                    <td>
+                        <span t-field="line.product_id.default_code"/>
+                    </td>
+                    <td>
+                        <span t-field="line.name"/>
+                    </td>
+                    <td class="text-center">
+                        <span t-field="line.date_planned"/>
+                    </td>
+                    <td class="text-right">
+                        <span t-field="line.product_qty"/>
+                        <span t-field="line.product_uom.name" groups="product.group_uom"/>
+                    </td>
+                    <td class="text-right">
+                        <span t-field="line.price_unit"/>
+                    </td>
+                    <td class="text-right">
+                        <span t-field="line.price_subtotal" t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
+                    </td>
+                    <td>
+                        <span t-esc="', '.join(map(lambda x: x.name, line.taxes_id))"/>
+                    </td>
+                    <t t-set="count" t-value="count+1"/>
+                </tr>
+            </xpath>
+            <!-- arrete -->
+            <xpath expr="//div[@class='col-xs-4 pull-right']" position="after">
+                <div t-if="o.name" class="col-xs-8 pull-left">
+                    <strong>Arrêtée la présente facture à la somme de :
+                    </strong>
+                    <p t-field="o.amounTexte"/>
+                </div>
+            </xpath>
+            <!-- Remove 'your shipping company' -->
+            <!-- Replace by Request name & date -->
+            <xpath expr="//div[@class='col-xs-6']" position="replace">
+                <div class='col-xs-6 pull-left'>
+                    <h3 t-if="o.state != 'draft'">Purchase Order Confirmation N°<span t-field="o.name"/></h3>
+                    <h3 t-if="o.state == 'draft'">Request for Quotation N°<span t-field="o.name"/></h3>
+
+                    <div style="font-size:85%;">
+                        <!-- <div t-if="o.name" class="col-xs-3">
+                            <strong>Our Order Reference:</strong>
+                            <p t-field="o.name"/>
+                        </div> -->
+                        <div t-if="o.partner_ref" class="col-xs-4">
+                            <strong>Your Order Reference</strong>
+                            <p t-field="o.partner_ref"/>
+                        </div>
+                        <div t-if="o.date_order" class="col-xs-4">
+                            <strong>Order Date:</strong>
+                            <p t-field="o.date_order"/>
+                        </div>
+                        <div t-if="o.validator" class="col-xs-4">
+                            <strong>Validated By:</strong>
+                            <p t-field="o.validator"/>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+
+            <!-- Remove request name and date in original position -->
+            <xpath expr="//h2" position="replace">
+                <h2></h2>
+            </xpath>
+
+            <xpath expr="//div[@class='row mt32 mb32']" position="replace">
+                <div class="row mt32 mb32">
+                    <!-- Remplacé -->
+                </div>
+            </xpath>
+
+            <!-- Add RC NIF & AI on customer info -->
+            <xpath expr="//div[@class='col-xs-5 col-xs-offset-1']" position="replace">
+                <div class="col-xs-4 col-xs-offset-1">
+                    <table  style="width:120%;border-style:solid;border-color:#000000">
+                        <!-- class="table-bordered" -->
+                        <tr>
+                            <td>
+                                <h2 t-field="o.partner_id.name" style="padding-top:10px;margin:10px;"></h2>
+                                <div style="margin:10px;" t-field="o.partner_id" t-field-options='{"widget": "contact", "fields": ["address"], "no_marker": true}'/>
+
+                                <p style="margin:10px;">
+                                    RC N°:
+                                    <span t-field="o.partner_id.rc"/></p>
+                                <p style="margin:10px;">
+                                    NIF:
+                                    <span t-field="o.partner_id.nif"/></p>
+                                <p style="margin:10px;">
+                                    AI:
+                                    <span t-field="o.partner_id.ai"/></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p  style="margin:10px;">
+                                    Ref client:
+                                    <span t-field="o.partner_ref"/></p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </xpath>
+            <!-- Footer -->
+            <xpath expr="//div[@class='page']" position="after">
+                <t t-call="serial_reporting.soulco_custom_footer" />
+            </xpath>
+        </template>
+    </data>
+</openerp>
