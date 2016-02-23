@@ -166,7 +166,7 @@
           </div>
 
           <strong>Arrêtée la présente facture à la somme de:</strong>
-          <p t-field="o.text_amount"/>
+          <p t-field="o.amounTexte"/>
           <p t-field="o.note"/>
           <p t-if="o.payment_term.note">
             <strong>Payment Term:</strong>
